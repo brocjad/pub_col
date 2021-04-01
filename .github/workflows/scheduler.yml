@@ -1,0 +1,90 @@
+name: scheduler
+
+# Run this workflow every time a new commit pushed to your repository
+on:
+  schedule:
+    - cron: 30 1,4,7,10,13,16,19,22 * * *
+    - cron: 0 0,3,6,9,12,15,18,21 * * *
+
+
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  logon1:
+    # Name the Job
+    name: logon
+    # Set the type of machine to run on
+    runs-on: ubuntu-18.04
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: set up python 3.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+
+      - name: install packages
+        env:
+          DEFAULT_BRANCH: main
+          MASTER_KEY: ${{ secrets.MASTER_KEY}}
+          GITHUB_AUTH: ${{ secrets.BKAUTH}}
+        run: |
+          cd ../../
+          pwd
+          git clone https://$GITHUB_AUTH@github.com/brokenjade3000/colab_auto.git
+          cd colab_auto
+          chmod 775 ./script/install.sh
+          ./script/install.sh
+
+
+      # Runs the Super-Linter action
+      - name: Run on brochor3k
+        env:
+          DEFAULT_BRANCH: main
+          MASTER_KEY: ${{ secrets.MASTER_KEY}}
+        run: |
+          pwd
+          cd /home/runner/work/colab_auto/colab_auto
+          ls
+          firefox --version
+          python --version
+          python RunColab.py encrypted_cookies.txt lab3k.txt
+
+      # Runs the Super-Linter action
+      - name: Run on brokjad4k
+        env:
+          DEFAULT_BRANCH: main
+          MASTER_KEY: ${{ secrets.MASTER_KEY}}
+        run: |
+          pwd
+          cd colab_auto
+          firefox --version
+          python --version
+          python RunColab.py encrypted_brokjad_cookies.txt lab4k.txt
+
+      # Runs the Super-Linter action
+      - name: Run on brocjad6k_main
+        env:
+          DEFAULT_BRANCH: main
+          MASTER_KEY: ${{ secrets.MASTER_KEY}}
+        run: |
+          pwd
+          cd colab_auto
+          firefox --version
+          python --version
+          python RunColab.py encrypted_brocjad_cookies.txt lab6k.txt
+
+      - name: Run on brokjad_sub
+        env:
+          DEFAULT_BRANCH: main
+          MASTER_KEY: ${{ secrets.MASTER_KEY}}
+        run: |
+          pwd
+          cd colab_auto
+          firefox --version
+          python --version
+          python RunColab.py encrypted_brochjad_cookies.txt lab5k.txt
