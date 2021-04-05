@@ -76,6 +76,6 @@ jobs:
           cd /home/runner/work/colab_auto/colab_auto
           firefox --version
           python --version
-          python RunColab.py encrypted_brocjad_cookies.txt lab6k.txt
+      # python RunColab.py encrypted_brocjad_cookies.txt lab6k.txt
 
 
