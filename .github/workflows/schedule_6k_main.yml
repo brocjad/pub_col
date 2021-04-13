@@ -1,4 +1,4 @@
-name: schedule_main
+name: schedule_6k_main
 
 # Run this workflow every time a new commit pushed to your repository
 on:
