@@ -4,7 +4,7 @@ name: schedule_4k_main
 on:
   schedule:
 #     - cron: 0 1,5,9,13,17,21 * * *
-    - cron: 0 5,11,17,23 * * *
+    - cron: 7 5,11,17,23 * * *
 
 
 
